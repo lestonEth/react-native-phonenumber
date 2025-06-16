@@ -18,6 +18,16 @@ export const usePhoneNumber = (
     }, [value]);
 
     useEffect(() => {
+        const cleanValue = value.replace(/\D/g, '');
+        const cleanDialCode = country.dialCode.replace(/\D/g, '');
+
+        // Handle special case: input exactly matches dial code
+        if (cleanValue === cleanDialCode) {
+            setFormatted(`+${cleanValue}`);
+            setIsValid(false);
+            return;
+        }
+
         const {
             formatted: newFormatted,
             isValid: newIsValid,

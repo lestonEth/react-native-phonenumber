@@ -26,6 +26,13 @@ export const parsePhoneNumber = (input: string, currentCountry: Country) => {
 
     // Parse phone number with detected country
     try {
+        if (cleanInput === detectedCountry.dialCode.replace(/\D/g, '')) {
+            return {
+                formatted: `+${cleanInput}`,
+                isValid: false,
+                country: detectedCountry
+            };
+        }
         const phoneNumber = parsePhoneNumberFromString(input, {
             defaultCountry: detectedCountry.isoCode as CountryCode,
         });

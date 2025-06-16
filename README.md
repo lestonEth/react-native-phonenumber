@@ -1,51 +1,85 @@
-# Welcome to your Expo app 👋
+# React Native Phone Input
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A customizable phone number input component with country code selection and validation.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Country code picker with search functionality
+- Automatic phone number formatting
+- Phone number validation
+- Light/dark theme support
+- Customizable styles
+- TypeScript support
 
-   ```bash
-   npm install
-   ```
+## Installation
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. Install the package:
 
 ```bash
-npm run reset-project
+npm install react-native-phone-input
+# or
+yarn add react-native-phone-input
+
+npm install libphonenumber-js
+# or
+yarn add libphonenumber-js
+Usage
+jsx
+import React from 'react';
+import { PhoneInput } from 'react-native-phone-input';
+
+const App = () => {
+  const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [isValid, setIsValid] = React.useState(false);
+
+  return (
+    <PhoneInput
+      value={phoneNumber}
+      onChange={(value, valid) => {
+        setPhoneNumber(value);
+        setIsValid(valid);
+      }}
+      defaultCountry="US"
+      theme="light" // or 'dark'
+      placeholder="Enter phone number"
+    />
+  );
+
+};
+export default App;
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Styling
+You can customize the appearance by passing style props or by modifying the theme:
 
-## Learn more
+```bash
+<PhoneInput
+  style={{ backgroundColor: '#f5f5f5' }}
+  textStyle={{ color: '#333' }}
+  flagStyle={{ marginRight: 8 }}
+/>
+```
+### Validation
+The component automatically validates phone numbers according to the selected country's format. The onChange callback provides a boolean indicating whether the current input is valid.
 
-To learn more about developing your project with Expo, look at the following resources:
+Country Data
+The component includes a comprehensive list of countries with:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+* ISO country codes
 
-## Join the community
+* Country names
 
-Join our community of developers creating universal apps.
+* Dial codes
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# react-native-phonenumber
+* Emoji flags
+
+You can search countries by:
+
+* Name (e.g., "United States")
+
+* Dial code (e.g., "+1")
+
+### TypeScript Support
+The package includes TypeScript type definitions for all props and components.
+
+### Licence 
